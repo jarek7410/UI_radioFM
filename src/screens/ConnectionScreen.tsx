@@ -13,16 +13,14 @@ export const ConnectionScreen = ({connect}) => {
         console.log("connect action+url: " + url)
         setLoadingColor(MD2Colors.red800);
         setConnecting(true);
-        if (checkUrl(url)) {
-            connect();
-        } else {
-            await performTimeConsumingTask(1500)
+        if (!checkUrl(url)) {
+            await performTimeConsumingTask(500)
             setLoadingColor(MD2Colors.black);
             setConnecting(false)
             setloadingVisible(false);
         }
+        await connect(url);
         console.log("connect action end")
-
     }
     return (
         <View

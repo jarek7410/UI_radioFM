@@ -6,16 +6,16 @@ export interface radioDto {
 export interface room{
     audioUrls:
         {
-            hls:string,
-            rtmp:string,
-            rtsp:string,
-            srt:string,
-            webrtc:string
+            hls:String,
+            rtmp:String,
+            rtsp:String,
+            srt:String,
+            webrtc:String
         },
     currentClientsNumber:number,
-    dataUrl:string,
-    description:string,
+    dataUrl:String,
+    description:String,
     maxClientsNumber:number,
-    path:string,
-    title:string
+    path:String,
+    title:String
 }
