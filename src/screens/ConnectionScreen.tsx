@@ -4,7 +4,7 @@ import { View} from "react-native";
 import {checkUrl} from "../helper/connectionHelper";
 import {performTimeConsumingTask} from "../helper/devHelper";
 import { connect } from "react-redux";
-import { SetStreamURLAction } from "../../actions/commectionActions";
+import { SetStreamURLAction } from "../../actions/connectionActions";
 
 const ConnectionScreen = (props) => {
     
