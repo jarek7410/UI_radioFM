@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import connectionReducer from "./reducers/connectionReducer";
-import radioReducer from "./reducers/radioReducers";
+import connectionReducer from "./src/reducers/connectionReducer";
+import radioReducer from "./src/reducers/radioReducers";
 
 const store = configureStore({
     reducer: {

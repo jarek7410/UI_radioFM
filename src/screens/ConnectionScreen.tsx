@@ -10,6 +10,9 @@ const ConnectionScreen = (props) => {
     
     const {streamURL, setStreamURL} = props; //passed by redux mapping
     const {connectToStream} = props; //passed as prop in Main
+    // to jest czemu mi sie nie podova redux musisz komentować kod
+    //który normalnie byłby self explenatory
+    //#DoITBetterDoItWithoutRedux!!!!!!!!
     
     const [connecting , setConnecting] = React.useState(false);
     const [loadingColor, setLoadingColor] = React.useState(MD2Colors.red800);
@@ -23,7 +26,9 @@ const ConnectionScreen = (props) => {
             setLoadingColor(MD2Colors.black);
             setConnecting(false)
             setloadingVisible(false);
+            return
         }
+        await connectToStream(streamURL);
         console.log("connect action end")
 
     }

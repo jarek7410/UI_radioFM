@@ -7,12 +7,24 @@ import ListAccordion from "react-native-paper/lib/typescript/components/List/Lis
 import ListIcon from "react-native-paper/lib/typescript/components/List/ListIcon";
 import { connect } from "react-redux";
 import { SetCurrentStation } from "../../actions/radioActions";
+import Player from "./Player";
 
-function PlayerScreen(props) {
+export const PlayerScreen = (props) =>{
     const { radioData, currentStation, setCurrentStation} = props
     console.log("Current station : ", currentStation)
-    const currentStationTitle = currentStation === null ? 
+    const currentStationTitle = currentStation === null ?
         ('No station selected') : (currentStation.title);
+
+    const [station, setStation] = React.useState(
+        {title: 'no station',
+            audioUrls:{
+                hls:"http://localhost:8888/radio_zet/index.m3u8",
+                rtmp:"rtmp://localhost:1935/radio_zet",
+                rtsp:"rtsp://localhost:8554/radio_zet",
+                srt:"srt://localhost:8890?streamid=read:radio_zet",
+                webrtc:"http://localhost:8889/radio_zet"
+            },
+        });
     return (
         <View
             style={{
@@ -47,6 +59,7 @@ function PlayerScreen(props) {
                     mode={'contained'}
                 />
             </View>
+            {/*<Player url={station.title}/>*/}
             <Text>{currentStationTitle}</Text>
                 <View
                 style={{
@@ -58,9 +71,9 @@ function PlayerScreen(props) {
                 }}
             >
                 <List.Accordion title={'chouse radio'}>
-                    {radioData.map((station) => {
+                    {radioData.map((radio) => {
                         return(<>
-                            <List.Item title={station.title} onPress={()=>{setCurrentStation(station)}}/>
+                            <List.Item title={radio.title} onPress={()=>{setStation(radio)}}/>
                         </>)
                     })}
                 </List.Accordion>
@@ -69,18 +82,3 @@ function PlayerScreen(props) {
         </View>
     )
 }
-
-const mapStateToProps = (state) => {
-    return {
-        radioData : state.radio.radioData,
-        currentStation: state.radio.currentStation
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        setCurrentStation : (station) => { dispatch(SetCurrentStation(station)) }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PlayerScreen)
