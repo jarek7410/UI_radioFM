@@ -2,11 +2,13 @@ import * as React from 'react';
 import {IconButton, MD3Colors, MD3LightTheme as DefaultTheme, PaperProvider} from 'react-native-paper';
 import Demo from "./src/screens/Demo";
 import {Player} from "./src/screens/Player";
-import {ConnectionScreen} from "./src/screens/ConnectionScreen";
+import ConnectionScreen from "./src/screens/ConnectionScreen";
 import {screenEnum} from "./src/enum/screen";
 import {PlayerScreen} from "./src/screens/PlayerScreen";
 import {SettingScreen} from "./src/screens/SettingScreen";
 import {View} from "react-native";
+import { Provider } from 'react-redux';
+import store from './store'
 
 const theme = {
   ...DefaultTheme,
@@ -28,7 +30,7 @@ export default function Main() {
             )
         );
     }
-    const connect = async () => {
+    const connectToStream = async () => { // renamed to avoid name conflict with react-redux.connect
         console.log("connect");
         await performTimeConsumingTask()
         console.log("connected")
@@ -46,6 +48,7 @@ export default function Main() {
 
 
   return (
+    <Provider store={store}>
       <PaperProvider theme={theme}>
           <View
                 style={{
@@ -69,7 +72,7 @@ export default function Main() {
           </View>
           {screen === screenEnum.connect &&
               <ConnectionScreen
-                  connect={connect}
+                  connectToStream={connectToStream}
               />
           }
           {screen === screenEnum.player &&
@@ -79,5 +82,6 @@ export default function Main() {
               <SettingScreen />
           }
       </PaperProvider>
+    </Provider>
   );
 }
