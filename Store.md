@@ -9,6 +9,7 @@
     - audioUrls: URLs of audio streams using different protocols, including:
       - hls
       - rtmp
+      - rtsp
       - srt
       - webrtc
     - currentClientsNumber: nuber of user subscribed  to the channel
