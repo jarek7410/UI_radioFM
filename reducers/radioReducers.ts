@@ -30,7 +30,8 @@ const initState = {
             "maxClientsNumber":10,
             "path":"/rmf_fm",
             "title":"RMF FM"
-        }]
+        }],
+        currentStation: null,
 }
 
 const radioReducer = (state = initState, action) => {
@@ -44,6 +45,11 @@ const radioReducer = (state = initState, action) => {
             return {
                 ...state,
                 radioData : action.radioData,
+            }
+        case "SET_CURRENT_STATION":
+            return {
+                ...state,
+                currentStation: action.currentStation,
             }
     }
 

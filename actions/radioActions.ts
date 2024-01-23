@@ -4,3 +4,10 @@ export const SetRadioDataAction = (radioData : []) => {
         radioData
     }
 }
+
+export const SetCurrentStation = (currentStation) => {
+    return{
+        type: "SET_CURRENT_STATION",
+        currentStation
+    }
+}  

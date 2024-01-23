@@ -5,9 +5,14 @@ import {Text, View} from "react-native";
 import ListSection from "react-native-paper/lib/typescript/components/List/ListSection";
 import ListAccordion from "react-native-paper/lib/typescript/components/List/ListAccordion";
 import ListIcon from "react-native-paper/lib/typescript/components/List/ListIcon";
+import { connect } from "react-redux";
+import { SetCurrentStation } from "../../actions/radioActions";
 
-export const PlayerScreen = ({radioData}) => {
-    const [station, setStation] = React.useState({title: 'no station'});
+function PlayerScreen(props) {
+    const { radioData, currentStation, setCurrentStation} = props
+    console.log("Current station : ", currentStation)
+    const currentStationTitle = currentStation === null ? 
+        ('No station selected') : (currentStation.title);
     return (
         <View
             style={{
@@ -42,7 +47,7 @@ export const PlayerScreen = ({radioData}) => {
                     mode={'contained'}
                 />
             </View>
-            <Text>{station.title}</Text>
+            <Text>{currentStationTitle}</Text>
                 <View
                 style={{
                     flexDirection: 'row',
@@ -53,9 +58,9 @@ export const PlayerScreen = ({radioData}) => {
                 }}
             >
                 <List.Accordion title={'chouse radio'}>
-                    {radioData.map((radio) => {
+                    {radioData.map((station) => {
                         return(<>
-                            <List.Item title={radio.title} onPress={()=>{setStation(radio)}}/>
+                            <List.Item title={station.title} onPress={()=>{setCurrentStation(station)}}/>
                         </>)
                     })}
                 </List.Accordion>
@@ -64,3 +69,18 @@ export const PlayerScreen = ({radioData}) => {
         </View>
     )
 }
+
+const mapStateToProps = (state) => {
+    return {
+        radioData : state.radio.radioData,
+        currentStation: state.radio.currentStation
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setCurrentStation : (station) => { dispatch(SetCurrentStation(station)) }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerScreen)

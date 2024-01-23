@@ -4,7 +4,7 @@ import Demo from "./screens/Demo";
 import {Player} from "./screens/Player";
 import ConnectionScreen from "./screens/ConnectionScreen";
 import {screenEnum} from "./enum/screen";
-import {PlayerScreen} from "./screens/PlayerScreen";
+import PlayerScreen from "./screens/PlayerScreen";
 import {SettingScreen} from "./screens/SettingScreen";
 import {View} from "react-native";
 import { connect } from 'react-redux';
@@ -76,9 +76,7 @@ function Main(props) {
               />
           }
           {screen === screenEnum.player &&
-              <PlayerScreen
-                radioData={radioData}
-              />
+              <PlayerScreen />
           }
           {screen === screenEnum.settings &&
               <SettingScreen />

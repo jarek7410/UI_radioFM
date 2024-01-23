@@ -6,9 +6,10 @@ import {performTimeConsumingTask} from "../helper/devHelper";
 import { connect } from "react-redux";
 import { SetStreamURLAction } from "../../actions/connectionActions";
 
-const ConnectionScreen = (props, {connectToStream}) => {
+const ConnectionScreen = (props) => {
     
-    const {streamURL, setStreamURL} = props;
+    const {streamURL, setStreamURL} = props; //passed by redux mapping
+    const {connectToStream} = props; //passed as prop in Main
     
     const [connecting , setConnecting] = React.useState(false);
     const [loadingColor, setLoadingColor] = React.useState(MD2Colors.red800);
