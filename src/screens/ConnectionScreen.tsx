@@ -6,9 +6,9 @@ import {performTimeConsumingTask} from "../helper/devHelper";
 import { connect } from "react-redux";
 import { SetStreamURLAction } from "../../actions/connectionActions";
 
-const ConnectionScreen = (props) => {
+const ConnectionScreen = (props, {connectToStream}) => {
     
-    const {streamURL, setStreamURL, connectToStream} = props;
+    const {streamURL, setStreamURL} = props;
     
     const [connecting , setConnecting] = React.useState(false);
     const [loadingColor, setLoadingColor] = React.useState(MD2Colors.red800);
@@ -17,16 +17,14 @@ const ConnectionScreen = (props) => {
         console.log("connect action+url: " + streamURL)
         setLoadingColor(MD2Colors.red800);
         setConnecting(true);
-        if (checkUrl(streamURL)) {
-            connectToStream();
-        } else {
-            await performTimeConsumingTask(1500)
+        if (!checkUrl(streamURL)) {
+            await performTimeConsumingTask(500)
             setLoadingColor(MD2Colors.black);
             setConnecting(false)
             setloadingVisible(false);
         }
-        await connect(url);
         console.log("connect action end")
+
     }
     return (
         <View
