@@ -25,8 +25,8 @@ const ConnectionScreen = (props) => {
             setConnecting(false)
             setloadingVisible(false);
         }
+        await connect(url);
         console.log("connect action end")
-
     }
     return (
         <View
