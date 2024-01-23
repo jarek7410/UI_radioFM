@@ -1,12 +1,13 @@
 import {IconButton, MD3Colors} from "react-native-paper";
 import * as React from 'react';
 import { List } from 'react-native-paper';
-import {View} from "react-native";
+import {Text, View} from "react-native";
 import ListSection from "react-native-paper/lib/typescript/components/List/ListSection";
 import ListAccordion from "react-native-paper/lib/typescript/components/List/ListAccordion";
 import ListIcon from "react-native-paper/lib/typescript/components/List/ListIcon";
 
 export const PlayerScreen = ({radioData}) => {
+    const [station, setStation] = React.useState({title: 'no station'});
     return (
         <View
             style={{
@@ -41,6 +42,7 @@ export const PlayerScreen = ({radioData}) => {
                     mode={'contained'}
                 />
             </View>
+            <Text>{station.title}</Text>
                 <View
                 style={{
                     flexDirection: 'row',
@@ -53,7 +55,7 @@ export const PlayerScreen = ({radioData}) => {
                 <List.Accordion title={'chouse radio'}>
                     {radioData.map((radio) => {
                         return(<>
-                            <List.Item title={radio.title}/>
+                            <List.Item title={radio.title} onPress={()=>{setStation(radio)}}/>
                         </>)
                     })}
                 </List.Accordion>
