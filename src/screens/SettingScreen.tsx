@@ -1,5 +1,6 @@
 import React from "react";
 import {Text, View} from "react-native";
+import SettingPanel from "../components/settings/SettingPanel";
 
 export const SettingScreen = () => {
     return (
@@ -13,7 +14,7 @@ export const SettingScreen = () => {
                 backgroundColor: "pink"
             }}
         >
-            <Text>SettingScreen</Text>
+            <SettingPanel />
         </View>
     )
 }
