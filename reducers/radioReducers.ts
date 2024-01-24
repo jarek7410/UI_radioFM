@@ -1,37 +1,42 @@
-const initState = {
-    radioData: [{
+import { addIdsToObjArray } from "../src/helper/utilHelper";
+
+const radioDataWithIds = addIdsToObjArray([{
+    "audioUrls":
+        {
+            "hls":"http://localhost:8888/radio_zet/index.m3u8",
+            "rtmp":"rtmp://localhost:1935/radio_zet",
+            "rtsp":"rtsp://localhost:8554/radio_zet",
+            "srt":"srt://localhost:8890?streamid=read:radio_zet",
+            "webrtc":"http://localhost:8889/radio_zet"
+        },
+    "currentClientsNumber":0,
+    "dataUrl":"localhost:3000/v1/rooms/radio_zet/data",
+    "description":"Stacja radiowa FM",
+    "maxClientsNumber":10,
+    "path":"/radio_zet",
+    "title":"Radio ZET"
+},
+    {
         "audioUrls":
             {
-                "hls":"http://localhost:8888/radio_zet/index.m3u8",
-                "rtmp":"rtmp://localhost:1935/radio_zet",
-                "rtsp":"rtsp://localhost:8554/radio_zet",
-                "srt":"srt://localhost:8890?streamid=read:radio_zet",
-                "webrtc":"http://localhost:8889/radio_zet"
+                "hls":"http://localhost:8888/rmf_fm/index.m3u8",
+                "rtmp":"rtmp://localhost:1935/rmf_fm",
+                "rtsp":"rtsp://localhost:8554/rmf_fm",
+                "srt":"srt://localhost:8890?streamid=read:rmf_fm",
+                "webrtc":"http://localhost:8889/rmf_fm"
             },
         "currentClientsNumber":0,
-        "dataUrl":"localhost:3000/v1/rooms/radio_zet/data",
+        "dataUrl":"localhost:3000/v1/rooms/rmf_fm/data",
         "description":"Stacja radiowa FM",
         "maxClientsNumber":10,
-        "path":"/radio_zet",
-        "title":"Radio ZET"
-    },
-        {
-            "audioUrls":
-                {
-                    "hls":"http://localhost:8888/rmf_fm/index.m3u8",
-                    "rtmp":"rtmp://localhost:1935/rmf_fm",
-                    "rtsp":"rtsp://localhost:8554/rmf_fm",
-                    "srt":"srt://localhost:8890?streamid=read:rmf_fm",
-                    "webrtc":"http://localhost:8889/rmf_fm"
-                },
-            "currentClientsNumber":0,
-            "dataUrl":"localhost:3000/v1/rooms/rmf_fm/data",
-            "description":"Stacja radiowa FM",
-            "maxClientsNumber":10,
-            "path":"/rmf_fm",
-            "title":"RMF FM"
-        }],
-        currentStation: null,
+        "path":"/rmf_fm",
+        "title":"RMF FM"
+    }]) 
+
+const initState = {
+    radioData: radioDataWithIds,
+    currentStation: null,
+    currentStationId: -1,
 }
 
 const radioReducer = (state = initState, action) => {
@@ -50,6 +55,28 @@ const radioReducer = (state = initState, action) => {
             return {
                 ...state,
                 currentStation: action.currentStation,
+                currentStationId: action.currentStation.id,
+            }
+        case "SET_CURRENT_STATION_ID":
+            // checking if passed station id is correct
+            if (action.currentStationId < 0) {
+                console.log("Invalid station id:" , action.currentStationId)
+                return state
+            }
+            if (action.currentStationId >= state.radioData.length) {
+                console.log("No station with id:", action.currentStationId)
+                return state
+            }
+            return {
+                ...state,
+                currenStationId: action.currentStationId,
+                currentStation: state.radioData.find((station) => {station.id = action.currenStationId}),
+            }
+        case "RESET_CURRENT_STATION":
+            return {
+                ...state,
+                currentStation: null,
+                currentStationId: -1,
             }
     }
 

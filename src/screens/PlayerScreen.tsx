@@ -6,10 +6,10 @@ import ListSection from "react-native-paper/lib/typescript/components/List/ListS
 import ListAccordion from "react-native-paper/lib/typescript/components/List/ListAccordion";
 import ListIcon from "react-native-paper/lib/typescript/components/List/ListIcon";
 import { connect } from "react-redux";
-import { SetCurrentStation } from "../../actions/radioActions";
+import { SetCurrentStationAction } from "../../actions/radioActions";
 
 function PlayerScreen(props) {
-    const { radioData, currentStation, setCurrentStation} = props
+    const { radioData, currentStation, setCurrentStation, currentStationId} = props
     console.log("Current station : ", currentStation)
     const currentStationTitle = currentStation === null ? 
         ('No station selected') : (currentStation.title);
@@ -38,6 +38,7 @@ function PlayerScreen(props) {
                     size={40}
                     onPress={() => console.log('Pressed')}
                     mode={'contained'}
+                    key={'play'}
                 />
                 <IconButton
                     icon="stop"
@@ -45,6 +46,7 @@ function PlayerScreen(props) {
                     size={40}
                     onPress={() => console.log('Pressed')}
                     mode={'contained'}
+                    key={'stop'}
                 />
             </View>
             <Text>{currentStationTitle}</Text>
@@ -57,10 +59,20 @@ function PlayerScreen(props) {
                     height: 250,
                 }}
             >
-                <List.Accordion title={'chouse radio'}>
+                <List.Accordion title={'chouse radio'} expanded={true}>
                     {radioData.map((station) => {
+                        const stationStyle = station.id === currentStationId ? ({ // style for chosen station
+                            borderWidth: 3,
+                            boxsSadowRadius: 2,
+                        }) : ({ // style for other stations
+                        })
+                        console.log("Station title:", station.title, ", sation id", station.id)
                         return(<>
-                            <List.Item title={station.title} onPress={()=>{setCurrentStation(station)}}/>
+                            <List.Item title={station.title} 
+                            description={station.description}
+                            onPress={()=>{setCurrentStation(station)}}
+                            key={station.id}
+                            style={stationStyle}/>
                         </>)
                     })}
                 </List.Accordion>
@@ -73,13 +85,14 @@ function PlayerScreen(props) {
 const mapStateToProps = (state) => {
     return {
         radioData : state.radio.radioData,
-        currentStation: state.radio.currentStation
+        currentStation: state.radio.currentStation,
+        currentStationId: state.radio.currentStationId,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCurrentStation : (station) => { dispatch(SetCurrentStation(station)) }
+        setCurrentStation : (station) => { dispatch(SetCurrentStationAction(station)) }
     }
 }
 

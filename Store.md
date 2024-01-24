@@ -5,6 +5,7 @@
 * radio
   - currentStation: station to which the user is currently listening, set to `null` if no station has yet been selected,
   contains the same data of the station as the specified in radioData
+  - currentStationId: id of currentStation (same as currentStation.id if current station is no `null`), set to `-1` if no station is selected
   - radioData: array containing avaible radio channels, each channel has:
     - audioUrls: URLs of audio streams using different protocols, including:
       - hls

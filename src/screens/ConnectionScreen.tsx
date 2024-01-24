@@ -23,6 +23,8 @@ const ConnectionScreen = (props) => {
             setLoadingColor(MD2Colors.black);
             setConnecting(false)
             setloadingVisible(false);
+        } else {
+            connectToStream()
         }
         console.log("connect action end")
 

@@ -5,9 +5,23 @@ export const SetRadioDataAction = (radioData : []) => {
     }
 }
 
-export const SetCurrentStation = (currentStation) => {
+export const SetCurrentStationAction = (currentStation) => {
     return{
         type: "SET_CURRENT_STATION",
         currentStation
     }
 }  
+
+
+export const SetCurrentStationIdAction = (currentStationId : number) => {
+    return{
+        type: "SET_CURRENT_STATION_ID",
+        currentStationId
+    }
+}  
+
+export const ResetCurrentStationAction = () => {
+    return {
+        type: "RESET_CURRENT_STATION"
+    }
+}
