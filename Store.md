@@ -17,3 +17,5 @@
     - decription: description of the channel
     - path: path to API (doing what?)
     - title: title of the channel
+* sound
+  - soundProfile: mono or stereo (default)
