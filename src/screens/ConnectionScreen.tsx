@@ -41,6 +41,7 @@ const ConnectionScreen = (props) => {
                 label="stream url"
                 value={streamURL}
                 onChangeText={setStreamURL}
+                onSubmitEditing={connectAction}
             />
             <IconButton
                 icon="connection"

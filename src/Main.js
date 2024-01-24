@@ -49,7 +49,10 @@ function Main(props) {
 
 
   return (
-    <View>
+    <View
+        style={{
+            height: '100%'
+        }}>
         <View
                 style={{
                     flexDirection: 'row',
