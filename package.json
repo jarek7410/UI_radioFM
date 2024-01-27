@@ -19,6 +19,7 @@
     "expo-status-bar": "~1.6.0",
     "react": "^18.2.0",
     "react-dom": "18.2.0",
+    "react-hls-player": "^3.0.7",
     "react-native": "^0.72.10",
     "react-native-paper": "^5.12.1",
     "react-native-radio-player": "^0.3.1",
