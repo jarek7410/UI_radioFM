@@ -31,6 +31,22 @@ const radioDataWithIds = addIdsToObjArray([{
         "maxClientsNumber":10,
         "path":"/rmf_fm",
         "title":"RMF FM"
+    },
+    {
+        "audioUrls":
+            {
+                "hls":"https://pl.streamingvideoprovider.com/mp3-playlist/playlist.m3u8",
+                "rtmp":"rtmp://localhost:1935/test",
+                "rtsp":"rtsp://localhost:8554/test",
+                "srt":"srt://localhost:8890?streamid=read:test",
+                "webrtc":"http://localhost:8889/test"
+            },
+        "currentClientsNumber":0,
+        "dataUrl":"localhost:3000/v1/rooms/test/data",
+        "description":"testing testing testing",
+        "maxClientsNumber":10,
+        "path":"/test",
+        "title":"TEST"
     }]) 
 
 const initState = {

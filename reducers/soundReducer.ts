@@ -1,5 +1,6 @@
 const initState = {
-    soundProfile: 'stereo'
+    soundProfile: 'stereo',
+    playing: true,
 }
 
 const soundReducer = (state = initState, action) => {
@@ -14,6 +15,17 @@ const soundReducer = (state = initState, action) => {
                 ...state,
                 soundProfile: action.soundProfile,
             }
+        case "SET_PLAY":
+            return {
+                ...state,
+                playing: true,
+            }
+        case "SET_PAUSE":
+            return {
+                ...state,
+                playing: false,
+            }
+    
     }
 
     return state;

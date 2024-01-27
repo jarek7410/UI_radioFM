@@ -1,23 +1,30 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { useEffect } from 'react';
 import ReactHlsPlayer from 'react-hls-player';
 
 import { connect } from 'react-redux';
 
 const HLSPlayer = (props) => {
-  const { currentStation } = props
+  const { currentStation, playing } = props
   const hlsURL = currentStation.audioUrls.hls
+  const playerRef = React.useRef();
+
+  useEffect(() => {
+    if (playing) {
+      playerRef.current.play()
+    } else {
+      playerRef.current.pause()
+    }
+  })
   
     return (
-    <View>
       <ReactHlsPlayer
-        src="https://pl.streamingvideoprovider.com/mp3-playlist/playlist.m3u8"
-        autoPlay={false}
-        controls={true}
+        playerRef={playerRef}
+        src={hlsURL}
+        autoPlay={playing}
+        controls={false}
         width="100%"
         height="auto"
       />
-    </View>
   );
 };
 
@@ -25,6 +32,7 @@ const HLSPlayer = (props) => {
 const mapStateToProps = (state) => {
     return {
         currentStation: state.radio.currentStation,
+        playing: state.sound.playing,
     }
 }
 

@@ -7,10 +7,12 @@ import ListAccordion from "react-native-paper/lib/typescript/components/List/Lis
 import ListIcon from "react-native-paper/lib/typescript/components/List/ListIcon";
 import { connect } from "react-redux";
 import { SetCurrentStationAction } from "../../actions/radioActions";
+import { setSoundPlayAction, setSoundPauseAction } from "../../actions/soundActions";
 import HLSPlayer from "../components/players/HLSPlayer";
 
 function PlayerScreen(props) {
     const { radioData, currentStation, setCurrentStation, currentStationId, protocol} = props
+    const { playing, setSoundPause, setSoundPlay } = props
     console.log("Current station : ", currentStation)
     const currentStationTitle = currentStation === null ? 
         ('No station selected') : (currentStation.title);
@@ -20,8 +22,11 @@ function PlayerScreen(props) {
         protocol === 'hls' ? <HLSPlayer/> : // add more protocols/players when implemented
         null
     )
-    console.log(player, protocol)
-
+    
+    const playButtonColor = playing ? '#6b6b6b' : '#f7f7f7';
+    const stopButtonColor = !(playing) ? '#6b6b6b' : '#f7f7f7';
+    const playButtonBackgroundColor = playing ? '#7d2c29' : '#d1291d';
+    const stopButtonBackgroundColor = !(playing) ? '#7d2c29' : '#d1291d';
 
     return (
         <View
@@ -44,23 +49,24 @@ function PlayerScreen(props) {
             >
                 <IconButton
                     icon="play"
-                    iconColor={MD3Colors.error50}
+                    iconColor={playButtonColor}
                     size={40}
-                    onPress={() => console.log('Pressed')}
+                    onPress={setSoundPlay}
                     mode={'contained'}
                     key={'play'}
+                    style={{backgroundColor: playButtonBackgroundColor}}
                 />
                 <IconButton
                     icon="stop"
-                    iconColor={MD3Colors.error50}
+                    iconColor={stopButtonColor}
                     size={40}
-                    onPress={() => console.log('Pressed')}
+                    onPress={setSoundPause}
                     mode={'contained'}
                     key={'stop'}
+                    style={{backgroundColor: stopButtonBackgroundColor}}
                 />
             </View>
             <Text>{currentStationTitle}</Text>
-            { player }
                 <View
                 style={{
                     flexDirection: 'row',
@@ -87,7 +93,7 @@ function PlayerScreen(props) {
                     })}
                 </List.Accordion>
             </View>
-
+            { player }
         </View>
     )
 }
@@ -98,12 +104,15 @@ const mapStateToProps = (state) => {
         currentStation: state.radio.currentStation,
         currentStationId: state.radio.currentStationId,
         protocol: state.connection.protocol,
+        playing: state.sound.playing,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setCurrentStation : (station) => { dispatch(SetCurrentStationAction(station)) }
+        setCurrentStation : (station) => { dispatch(SetCurrentStationAction(station)) },
+        setSoundPlay: () => { dispatch(setSoundPlayAction()) },
+        setSoundPause: () => { dispatch(setSoundPauseAction()) },
     }
 }
 
