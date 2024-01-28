@@ -7,6 +7,10 @@ import { useEffect } from "react";
 const StationDataDisplay = (props) => {
     const {currentStation, currentStationData, setCurrentStationData} = props;
 
+    if ( currentStation === null) {
+        return null
+    }
+
     const fetchRadioData = () => {
         const stationDataURL = currentStation.dataUrl
         axios.get(stationDataURL).then(
@@ -23,9 +27,7 @@ const StationDataDisplay = (props) => {
         return () => clearInterval(intervalId);
       }, []);
 
-    if ( currentStation === null) {
-        return null
-    }
+
 
     const {programmeName, radioText} = currentStationData
     console.log(programmeName, radioText)
