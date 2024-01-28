@@ -2,6 +2,7 @@ import { connect } from "react-redux"
 import { SetCurrentStationDataAction } from "../../../actions/radioActions"
 import axios from "axios";
 import { View, Text } from "react-native";
+import { useEffect } from "react";
 
 const StationDataDisplay = (props) => {
     const {currentStation, currentStationData, setCurrentStationData} = props;
@@ -16,6 +17,12 @@ const StationDataDisplay = (props) => {
         ).catch(error => console.error('Error geting radio data', error))
     }
 
+    useEffect(() => {
+        const fetch = fetchRadioData
+        const intervalId = setInterval(fetch, 5000);
+        return () => clearInterval(intervalId);
+      }, []);
+
     if ( currentStation === null) {
         return null
     }
@@ -25,8 +32,6 @@ const StationDataDisplay = (props) => {
     if ( programmeName === "" && radioText === "" ) { // fetching station data from API if not present
         fetchRadioData()
     }
-    
-    const intervalID = setInterval(fetchRadioData, 5000)
 
     return (
         <View
