@@ -30,7 +30,7 @@ function Main(props) {
         console.log(`${streamURL}/v1/rooms`)
         axios.get(`${streamURL}/v1/rooms`).
         then(res => {
-            const radiosWithId = addIdsToObjArray(res.data)
+            const radiosWithId = addIdsToObjArray(res.data.rooms)
             setRadioData(radiosWithId)
         }).then(
             res => setScreen("player")
