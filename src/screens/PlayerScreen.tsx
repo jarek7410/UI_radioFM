@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { SetCurrentStationAction } from "../../actions/radioActions";
 import { setSoundPlayAction, setSoundPauseAction } from "../../actions/soundActions";
 import HLSPlayer from "../components/players/HLSPlayer";
+import WebRTCPlayer from "../components/players/WebRTCPlayer";
 
 function PlayerScreen(props) {
     const { radioData, currentStation, setCurrentStation, currentStationId, protocol} = props
@@ -20,6 +21,7 @@ function PlayerScreen(props) {
 
     const player = currentStationId === -1 ? (null) : (
         protocol === 'hls' ? <HLSPlayer/> : // add more protocols/players when implemented
+        protocol === 'webrtc' ? <WebRTCPlayer /> :
         null
     )
     

@@ -39,7 +39,7 @@ const radioDataWithIds = addIdsToObjArray([{
                 "rtmp":"rtmp://localhost:1935/test",
                 "rtsp":"rtsp://localhost:8554/test",
                 "srt":"srt://localhost:8890?streamid=read:test",
-                "webrtc":"http://localhost:8889/test"
+                "webrtc":"http://radioserver11.profesionalhosting.com:9069/stream"
             },
         "currentClientsNumber":0,
         "dataUrl":"localhost:3000/v1/rooms/test/data",
