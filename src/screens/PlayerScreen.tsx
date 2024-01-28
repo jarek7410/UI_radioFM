@@ -10,6 +10,7 @@ import { SetCurrentStationAction } from "../../actions/radioActions";
 import { setSoundPlayAction, setSoundPauseAction } from "../../actions/soundActions";
 import HLSPlayer from "../components/players/HLSPlayer";
 import WebRTCPlayer from "../components/players/WebRTCPlayer";
+import StationDataDisplay from "../components/displays/stationDataDisplay";
 
 function PlayerScreen(props) {
     const { radioData, currentStation, setCurrentStation, currentStationId, protocol} = props
@@ -96,6 +97,7 @@ function PlayerScreen(props) {
                 </List.Accordion>
             </View>
             { player }
+            <StationDataDisplay />
         </View>
     )
 }

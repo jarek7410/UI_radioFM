@@ -18,7 +18,14 @@ export const SetCurrentStationIdAction = (currentStationId : number) => {
         type: "SET_CURRENT_STATION_ID",
         currentStationId
     }
-}  
+}
+
+export const SetCurrentStationDataAction = (data: {[key: string] : string}) => {
+    return {
+        type: "SET_CURRENT_STATION_DATA",
+        data
+    }
+}
 
 export const ResetCurrentStationAction = () => {
     return {

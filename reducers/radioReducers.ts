@@ -53,6 +53,10 @@ const initState = {
     radioData: radioDataWithIds,
     currentStation: null,
     currentStationId: -1,
+    currentStationData: {
+        programmeName: '',
+        radioText: '',
+    },
 }
 
 const radioReducer = (state = initState, action) => {
@@ -72,6 +76,10 @@ const radioReducer = (state = initState, action) => {
                 ...state,
                 currentStation: action.currentStation,
                 currentStationId: action.currentStation.id,
+                currentStationData: {
+                    programmeName: '',
+                    radioText: '',
+                },
             }
         case "SET_CURRENT_STATION_ID":
             // checking if passed station id is correct
@@ -87,12 +95,25 @@ const radioReducer = (state = initState, action) => {
                 ...state,
                 currenStationId: action.currentStationId,
                 currentStation: state.radioData.find((station) => {station.id = action.currenStationId}),
+                currentStationData: {
+                    programmeName: '',
+                    radioText: '',
+                },
+            }
+        case "SET_CURRENT_STATION_DATA":
+            return {
+                ...state,
+                currentStationData: action.data,
             }
         case "RESET_CURRENT_STATION":
             return {
                 ...state,
                 currentStation: null,
                 currentStationId: -1,
+                currentStationData: {
+                    programmeName: '',
+                    radioText: '',
+                },
             }
     }
 
