@@ -12,7 +12,7 @@ const WebRTCPlayer = (props) => {
         style={{
             display: 'none'
         }}
-        allow='autoplay'
+        allow='autoplay; unmute'
         ></iframe>
         ) : (null)
     );
