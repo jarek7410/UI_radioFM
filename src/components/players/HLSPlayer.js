@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactHlsPlayer from 'react-hls-player';
+import { View, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -17,14 +18,23 @@ const HLSPlayer = (props) => {
   })
   
     return (
+      <View
+      style={{
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '100%',
+            }}>
+      <Text>{playing ? ("Playing") : ("Paused")}</Text>
       <ReactHlsPlayer
         playerRef={playerRef}
         src={hlsURL}
-        autoPlay={playing}
+        autoPlay={true}
         controls={false}
-        width="100%"
-        height="auto"
+        width="0%"
+        height="0%"
       />
+      </View>
   );
 };
 
