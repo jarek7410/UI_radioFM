@@ -6,13 +6,7 @@ import { View, Text } from "react-native";
 const StationDataDisplay = (props) => {
     const {currentStation, currentStationData, setCurrentStationData} = props;
 
-    if ( currentStation === null) {
-        return null
-    }
-
-    const {programmeName, radioText} = currentStationData
-    console.log(programmeName, radioText)
-    if ( programmeName === "" && radioText === "" ) { // fetching station data from API if not present
+    const fetchRadioData = () => {
         const stationDataURL = currentStation.dataUrl
         axios.get(stationDataURL).then(
             res => {
@@ -21,6 +15,18 @@ const StationDataDisplay = (props) => {
             }
         ).catch(error => console.error('Error geting radio data', error))
     }
+
+    if ( currentStation === null) {
+        return null
+    }
+
+    const {programmeName, radioText} = currentStationData
+    console.log(programmeName, radioText)
+    if ( programmeName === "" && radioText === "" ) { // fetching station data from API if not present
+        fetchRadioData()
+    }
+    
+    const intervalID = setInterval(fetchRadioData, 5000)
 
     return (
         <View
