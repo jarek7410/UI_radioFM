@@ -10,9 +10,11 @@ import {View} from "react-native";
 import { connect } from 'react-redux';
 import {room} from "./dto/radio.dto";
 import { SetRadioDataAction } from '../actions/radioActions';
+import axios from 'axios';
+import { addIdsToObjArray } from './helper/utilHelper';
 
 function Main(props) {
-    const {radioData, setRadioData} = props 
+    const {radioData, setRadioData, streamURL} = props 
 
     const [screen, setScreen] = React.useState(screenEnum.connect)
     const [BeforeSetting, setBeforeSetting] = React.useState(screenEnum.connect)
@@ -24,19 +26,17 @@ function Main(props) {
     //         )
     //     );
     // }
-    const connectToStream = async (url) => {
-        console.log("connect");
-        try{
-            const response = await fetch(url+"/v1/rooms")
-            const radioData = await response.json()
-            setRadioData(radioData)
-            console.log("connected")
-        }catch (e){
-            console.log("error")
-        }
-        // const radioData = require("/src/dto/radio.json")
-        setScreen("player")//todo: make it not after error
+    const connectToStream = () => {
+        console.log(`${streamURL}/v1/rooms`)
+        axios.get(`${streamURL}/v1/rooms`).
+        then(res => {
+            const radiosWithId = addIdsToObjArray(res.data)
+            setRadioData(radiosWithId)
+        }).then(
+            res => setScreen("player")
+        ).catch(error => console.error('Error geting rooms', error))
     }
+
     const goSettingsAction = () => {
         console.log("settings");
         if(screen === screenEnum.settings) {
@@ -91,6 +91,7 @@ function Main(props) {
 const mapStateToProps = (state) => {
     return {
         radioData : state.radio.radioData,
+        streamURL : state.connection.streamURL
     }
 }
 

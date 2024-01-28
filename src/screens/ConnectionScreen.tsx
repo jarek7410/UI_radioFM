@@ -15,10 +15,10 @@ const ConnectionScreen = (props) => {
     const [loadingColor, setLoadingColor] = React.useState(MD2Colors.red800);
     const [loadingVisible, setloadingVisible] = React.useState(true);
     const connectAction = async () => {
-        console.log("connect action+url: " + streamURL)
         setLoadingColor(MD2Colors.red800);
         setConnecting(true);
         if (!checkUrl(streamURL)) {
+            console.log('Wrong URL')
             await performTimeConsumingTask(500)
             setLoadingColor(MD2Colors.black);
             setConnecting(false)
@@ -26,7 +26,6 @@ const ConnectionScreen = (props) => {
         } else {
             connectToStream()
         }
-        console.log("connect action end")
 
     }
     return (

@@ -13,6 +13,7 @@
     "@expo/webpack-config": "^19.0.0",
     "@reduxjs/toolkit": "^2.0.1",
     "@types/react": "~18.2.14",
+    "axios": "^1.6.7",
     "expo": "~49.0.15",
     "expo-av": "^13.6.0",
     "expo-media-library": "^15.6.0",

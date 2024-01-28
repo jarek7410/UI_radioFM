@@ -1,5 +1,5 @@
 const initState = {
-    streamURL : '',
+    streamURL : 'http://localhost:3000',
     protocol : 'hls'
 }
 
