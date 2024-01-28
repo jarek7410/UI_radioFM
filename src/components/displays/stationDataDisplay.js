@@ -25,7 +25,7 @@ const StationDataDisplay = (props) => {
         const fetch = fetchRadioData
         const intervalId = setInterval(fetch, 5000);
         return () => clearInterval(intervalId);
-      }, []);
+      }, [currentStation]);
 
 
 
