@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 function ProtocolPicker(props) {
     const {protocol, setProtocol} = props;
     const avaibleProtocols = [
-        "hls", "webrtc" 
+        "hls", "webrtc", "rtsp" 
     ]
 
     return (

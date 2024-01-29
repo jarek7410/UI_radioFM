@@ -11,6 +11,7 @@ import { setSoundPlayAction, setSoundPauseAction } from "../../actions/soundActi
 import HLSPlayer from "../components/players/HLSPlayer";
 import WebRTCPlayer from "../components/players/WebRTCPlayer";
 import StationDataDisplay from "../components/displays/stationDataDisplay";
+import RTSPPlayer from "../components/players/RTSPPlayer";
 
 function PlayerScreen(props) {
     const { radioData, currentStation, setCurrentStation, currentStationId, protocol} = props
@@ -23,6 +24,7 @@ function PlayerScreen(props) {
     const player = currentStationId === -1 ? (null) : (
         protocol === 'hls' ? <HLSPlayer/> : // add more protocols/players when implemented
         protocol === 'webrtc' ? <WebRTCPlayer /> :
+        protocol === 'rtsp' ? <RTSPPlayer /> :
         null
     )
     
