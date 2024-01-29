@@ -3,6 +3,7 @@ import { SetCurrentStationDataAction } from "../../../actions/radioActions"
 import axios from "axios";
 import { View, Text } from "react-native";
 import { useEffect } from "react";
+import { MD3Colors } from "react-native-paper";
 
 const StationDataDisplay = (props) => {
     const {currentStation, currentStationData, setCurrentStationData} = props;
@@ -47,11 +48,17 @@ const StationDataDisplay = (props) => {
             <Text
                 style={{
                     fontSize: 20,
-                    fontWeight: 'bold'
+                    fontWeight: 'bold',
+                    color: MD3Colors.error50
                     }}>
                 {programmeName}
             </Text>
-            <Text>{radioText}</Text>
+            <Text
+            style={{
+                    fontSize: 14,
+                    color: '#b5b3ae'
+                    }}>
+                    {radioText}</Text>
         </View>
     )
 }

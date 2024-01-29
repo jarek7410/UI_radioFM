@@ -11,7 +11,7 @@ export const SettingScreen = () => {
                 alignItems: 'center',
                 width: '100%',
                 height: '100%',
-                backgroundColor: "pink"
+                backgroundColor: "#1f1f1f"
             }}
         >
             <SettingPanel />
