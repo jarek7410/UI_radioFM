@@ -39,36 +39,7 @@ function PlayerScreen(props) {
                 alignItems: 'center',
                 width: '100%',
                 // height: '100%',
-            }}
-        >
-            <View
-                style={{
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'flex-end',
-                    width: '100%',
-                    height: 250,
-                }}
-            >
-                <IconButton
-                    icon="play"
-                    iconColor={playButtonColor}
-                    size={40}
-                    onPress={setSoundPlay}
-                    mode={'contained'}
-                    key={'play'}
-                    style={{backgroundColor: playButtonBackgroundColor}}
-                />
-                <IconButton
-                    icon="stop"
-                    iconColor={stopButtonColor}
-                    size={40}
-                    onPress={setSoundPause}
-                    mode={'contained'}
-                    key={'stop'}
-                    style={{backgroundColor: stopButtonBackgroundColor}}
-                />
-            </View>
+            }}>
             <Text>{currentStationTitle}</Text>
                 <View
                 style={{

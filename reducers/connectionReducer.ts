@@ -1,6 +1,6 @@
 const initState = {
     streamURL : 'http://localhost:3000',
-    protocol : 'hls'
+    protocol : 'webrtc'
 }
 
 const connectionReducer = (state = initState, action : any) => {

@@ -4,23 +4,18 @@ import { connect } from 'react-redux';
 const WebRTCPlayer = (props) => {
     const {currentStation, playing} = props;
     const webrtcURL = currentStation.audioUrls.webrtc;
-    const iframeRef = useRef(null);
-    
-    useEffect(()=> {
-        if(iframeRef.current) {
-        const contentWindow = iframeRef.current.contentWindow;
-        if (contentWindow) {
-            contentWindow.postMessage('unmute', '*');
-        }
-    }})
+
 
     return (
         playing ? (
         <iframe 
-        ref={iframeRef}
         src={webrtcURL}
         style={{
-            display: 'none'
+            borderRadius: '25px',
+            height: '70px',
+            width: '200px',
+            margin: '20px',
+            background: 'white',
         }}
         allow='autoplay'
         ></iframe>
